@@ -6,4 +6,6 @@ router.get('/', bookController.index)
 
 router.get('/:id', bookController.show)
 
+router.post('/', bookController.store)
+
 module.exports = router

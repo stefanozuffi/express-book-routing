@@ -41,12 +41,13 @@ function store(req, res) {
     const maxID = Math.max(...books.map(book => book.id))
     
     const newBook = {
-        id : maxID++,
+        id : maxID + 1,
         title,
         author,
         genre
     }
 
+    books.push(newBook)
     res.json(newBook)
 }
 
