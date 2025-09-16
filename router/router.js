@@ -12,4 +12,6 @@ router.put('/:id', bookController.update)
 
 router.patch('/:id', bookController.modify)
 
+router.delete('/:id', bookController.destroy)
+
 module.exports = router

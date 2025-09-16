@@ -48,6 +48,7 @@ function store(req, res) {
     }
 
     books.push(newBook)
+    //console.log(books)
     res.json(newBook)
 }
 
@@ -98,6 +99,19 @@ function modify(req, res) {
 }
 
 function destroy(req, res) {
+    const {id} = req.params
+    const book = books.find(b => b.id === parseInt(id))
+
+    if (!book) {
+        return res.status(404).json({
+            error: true,
+            message: 'Post Id not found'
+        })
+    }
+
+    books.splice(books.indexOf(book), 1)
+    //console.log(books)
+    res.json(book)
     
 }
 
