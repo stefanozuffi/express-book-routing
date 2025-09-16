@@ -18,7 +18,7 @@ function show(req, res) {
     const book = books.find(b => b.id === id)
 
     if (!book) {
-        res.status(404).json({
+        return res.status(404).json({
             error: true,
             message: 'No correspondent id was found'
         })
@@ -28,7 +28,26 @@ function show(req, res) {
 }
 
 function store(req, res) {
+    const {title, author, genre} = req.body
+
+    //Error Handling
+    if (!title || !author || !genre) {
+        return res.status(400).json({
+            error: "Campi richiesti: title, author, genre"
+        });
+    }
     
+    //Creazione nuovo libro
+    const maxID = Math.max(...books.map(book => book.id))
+    
+    const newBook = {
+        id : maxID++,
+        title,
+        author,
+        genre
+    }
+
+    res.json(newBook)
 }
 
 function update(req, res) {
