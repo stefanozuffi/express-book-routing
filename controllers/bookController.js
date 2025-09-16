@@ -2,8 +2,9 @@ const {books} = require('../data/bookArray.js')
 
 function index(req, res) {
     let targets = books
-    if (req.query) {
-        
+
+    if (Object.keys(req.query).length > 0) {
+        console.log('Siamo entrati nello if')
         targets = books.filter(book => {
             Object.keys(req.query).every(key => req.query[key] === book[key])
         })
@@ -13,8 +14,8 @@ function index(req, res) {
 }
 
 function show(req, res) {
-    const {id} = req.params.id
-    const book = books.find(b => b.id === parseInt(id))
+    const id = parseInt(req.params.id)
+    const book = books.find(b => b.id === id)
 
     if (!book) {
         res.status(404).json({

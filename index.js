@@ -1,4 +1,4 @@
-const express = require(express)
+const express = require('express')
 const app = express()
 const port = 3001
 
@@ -17,3 +17,5 @@ app.get('/api/', (req, res) => {
 })
 
 //-----Router-----
+const router = require('./router/router.js')
+app.use('/api/books', router)
