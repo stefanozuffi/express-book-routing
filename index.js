@@ -19,3 +19,11 @@ app.get('/api/', (req, res) => {
 //-----Router-----
 const router = require('./router/router.js')
 app.use('/api/books', router)
+
+//---Server Error handler
+const serverError = require('./middlewares/serverError.js')
+app.use(serverError)
+
+//--- EndPoint not found Handler
+const notFoundErr = require('./middlewares/notFound.js')
+app.use(notFoundErr)
