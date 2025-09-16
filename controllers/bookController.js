@@ -52,11 +52,49 @@ function store(req, res) {
 }
 
 function update(req, res) {
-    
+    const {id} = req.params
+    const book = books.find(b => b.id === parseInt(id))
+
+    //Error Handling
+    const {title, author, genre} = req.body
+    if (!title || !author || !genre) {
+        return res.status(400).json({
+            error: true,
+            message: "Campi richiesti: title, author, genre"
+        });
+    }
+
+    //Modifica del post
+    for (let key in book) {
+        if (key == 'id') {
+            continue
+        }
+        book[key] = req.body[key]
+    }
+
+    res.json(book)
+
 }
 
 function modify(req, res) {
-    
+    const {id} = req.params
+    const book = books.find(b => b.id === parseInt(id))
+
+    if (!book) {
+        return res.status(404).json({
+            error: true,
+            message: 'Post Id not found'
+        })
+    }
+
+    for (let key in book) {
+        if (!Object.keys(req.body).includes(key)) {
+            continue
+        }
+        book[key] = req.body[key]
+    }
+
+    res.json(book)
 }
 
 function destroy(req, res) {
